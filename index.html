@@ -377,122 +377,8 @@
             100% { transform: scale(0, 0); filter: brightness(0); opacity: 0; }
         }
 
-        @keyframes tvReverseShutdown {
-            0% { transform: scale(0, 0); filter: brightness(0); opacity: 0; }
-            40% { transform: scale(0.001, 0.005); filter: brightness(5); opacity: 1; }
-            70% { transform: scale(1, 0.005); filter: brightness(3); opacity: 1; }
-            100% { transform: scale(1, 1); filter: brightness(1); opacity: 1; }
-        }
-
         .modal-box.crt-exit {
             animation: tvShutdown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        /* Visor de imágenes modal independiente */
-        #image-modal-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-        }
-
-        #image-modal-backdrop.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .image-modal-content {
-            position: relative;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            max-width: 900px;
-            width: 95%;
-            max-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: var(--shadow-lg);
-            transform-origin: center center;
-            transform: scale(0, 0);
-            filter: brightness(0);
-            opacity: 0;
-        }
-
-        .image-modal-content.crt-enter {
-            animation: tvReverseShutdown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .image-modal-content.crt-exit {
-            animation: tvShutdown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .image-modal-close {
-            position: absolute;
-            top: 0.75rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: #c88b32;
-            font-size: 1.8rem;
-            font-weight: bold;
-            cursor: pointer;
-            line-height: 1;
-            z-index: 10;
-            transition: color 0.2s ease;
-        }
-
-        .image-modal-close:hover {
-            color: #ffffff;
-        }
-
-        .image-modal-body {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-y: auto;
-            max-height: 80vh;
-        }
-
-        .image-modal-body img {
-            max-width: 100%;
-            max-height: 70vh;
-            object-fit: contain;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .image-modal-body h3 {
-            font-family: Georgia, "Times New Roman", serif;
-            color: #c88b32;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        /* Estilos de hipervínculos interactivos en los puntos del modal */
-        .modal-item-link {
-            color: #5eead4;
-            text-decoration: underline;
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-
-        .modal-item-link:hover {
-            color: #ffffff;
         }
 
         @keyframes blinkCursor {
@@ -587,21 +473,11 @@
         <p data-text="&bull; &copy; 2026 Instituto Quimera. &bull; Centro de Investigación, Docencia, Servicio y Difusión. &bull; Dr.C. Cesar Cerezo Camacho. &bull; Todos los derechos reservados. &bull;"></p>
     </footer>
 
-    <!-- Modal Principal -->
+    <!-- Modal -->
     <div id="modal-backdrop">
         <div class="modal-box" id="modal-content-box">
             <h2 id="modal-title"></h2>
             <div id="modal-body"></div>
-        </div>
-    </div>
-
-    <!-- Modal Secundario para Imágenes con Efecto TV Antigua -->
-    <div id="image-modal-backdrop">
-        <div class="image-modal-content" id="image-modal-box">
-            <button class="image-modal-close" id="img-close-btn">&times;</button>
-            <div class="image-modal-body" id="image-modal-body">
-                <!-- Se inyectará contenido dinámico de imagen -->
-            </div>
         </div>
     </div>
 
@@ -665,7 +541,7 @@
                 content: [
                     { type: 'p', text: "Quimera existe porque el conocimiento adquiere verdadero valor cuando puede ser comprendido, conectado, desarrollado, aplicado y transferido." },
                     { type: 'p', text: "Los problemas científicos, médicos, académicos y profesionales rara vez pertenecen a una sola disciplina. Su complejidad exige integrar conocimientos, establecer relaciones, formular mejores preguntas y desarrollar métodos que permitan transformar información en comprensión y comprensión en acción." },
-                    { type: 'p', text: "Por ello, Quimera não busca únicamente acumular conocimiento: busca generarlo, integrarlo, desarrollarlo y transferirlo de manera rigurosa, crítica y responsable." }
+                    { type: 'p', text: "Por ello, Quimera no busca únicamente acumular conocimiento: busca generarlo, integrarlo, desarrollarlo y transferirlo de manera rigurosa, crítica y responsable." }
                 ]
             },
             {
@@ -679,13 +555,12 @@
                 title: "¿CÓMO CUMPLIMOS NUESTRA MISIÓN?",
                 content: [
                     { type: 'p', text: "La misión de Quimera se desarrolla mediante cinco procesos interrelacionados:" },
-                    { type: 'ul_interactive', items: [
-                        { text: "-01. Investigación.", img: "investigacion.png", title: "Proceso 01: Investigación" },
-                        { text: "-02. Formación.", img: "formacion.png", title: "Proceso 02: Formación" },
-                        { text: "-03. Desarrollo.", img: "desarrollo.png", title: "Proceso 03: Desarrollo" },
-                        { text: "-04. Aplicación.", img: "aplicacion.png", title: "Proceso 04: Aplicación" },
-                        { text: "-05. Transferencia.", img: "transferencia.png", title: "Proceso 05: Transferencia" }
-                    ]}
+                    { type: 'ul', items: [
+                        "-01. Investigación.",
+                        "-02. Formación.",
+                        "-03. Desarrollo.",
+                        "-04. Aplicación.",
+                        "-05. Transferencia." }
                 ]
             },
             {
@@ -694,7 +569,7 @@
                     { type: 'p', text: "Estos procesos no funcionan como etapas asiladas\nForman un ciclo dinámico, el Ciclo de Quimera:" },
                     { type: 'flow', text: "INVESTIGACIÓN → CONOCIMIENTO → FORMACIÓN → DOCENCIA → CAPACIDAD → DESARROLLO → HERRAMIENTAS → APLICACIÓN → EXPERIENCIA → TRANSFERENCIA → NUEVAS PREGUNTAS → INVESTIGACIÓN" },
                     { type: 'p', text: "Cada resultado puede convertirse en el punto de partida de una nueva investigación.\nCada problema puede generar conocimiento.\nCada conocimiento puede convertirse en una capacidad\nCada capacidad.\nCada capacidad puede producir una herramienta o solución.\nCada aplicación puede generar experiencia.\nCada experiencia puede producir nuevas preguntas.\nY cada nueva pregunta puede inciar nuevamente el proceso." },
-                    { type: 'p', text: "Por ello, Quimera entiende el conocmiento como un sistema evolutivo y não como un producto terminado." }
+                    { type: 'p', text: "Por ello, Quimera entiende el conocmiento como un sistema evolutivo y no como un producto terminado." }
                 ]
             },
             {
@@ -716,7 +591,7 @@
                 content: [
                     { type: 'p', text: "Quimera existe para responder preguntas complejas sin reducirlas artificialmente a respuestas simples." },
                     { type: 'p', text: "Existimos para transformar preguntas en conocimiento, conocimiento en comprensión, comprensión en capacidad, y capacidad en práctica responsable." },
-                    { type: 'p', text: "Porque comprender não es el final del proceso: es el punto desde el cual comienza la transformación." }
+                    { type: 'p', text: "Porque comprender no es el final del proceso: es el punto desde el cual comienza la transformación." }
                 ]
             },
             {
@@ -927,59 +802,6 @@
             }, 100);
         }
 
-        // Lógica para abrir el visor de imágenes con efecto inverso de TV antigua y protección contra bugs
-        function openImageModal(imgSrc, imgTitle) {
-            const imgBackdrop = document.getElementById('image-modal-backdrop');
-            const imgBox = document.getElementById('image-modal-box');
-            const imgBody = document.getElementById('image-modal-body');
-
-            // Limpiar contenido previo para evitar que parpadee la imagen anterior (evita el bug)
-            imgBody.innerHTML = "";
-
-            // Remover animaciones anteriores para forzar reinicio limpio
-            imgBox.classList.remove('crt-exit', 'crt-enter');
-            void imgBox.offsetWidth; // Trigger reflow
-
-            // Construir el contenido actual de la imagen y su título
-            let titleElem = document.createElement('h3');
-            titleElem.textContent = imgTitle;
-
-            let imageElem = document.createElement('img');
-            imageElem.src = imgSrc;
-            imageElem.alt = imgTitle;
-
-            imgBody.appendChild(titleElem);
-            imgBody.appendChild(imageElem);
-
-            // Activar el contenedor general
-            imgBackdrop.classList.add('active');
-            // Ejecutar animación inversa de apagado (encendido estilo TV antigua)
-            imgBox.classList.add('crt-enter');
-
-            const closeImgModal = () => {
-                imgBox.classList.remove('crt-enter');
-                imgBox.classList.add('crt-exit');
-
-                setTimeout(() => {
-                    imgBackdrop.classList.remove('active');
-                    imgBox.classList.remove('crt-exit');
-                    imgBody.innerHTML = ""; // Limpiar completamente al cerrar
-                }, 400); // Duración de la animación en CSS
-            };
-
-            const closeBtn = document.getElementById('img-close-btn');
-            closeBtn.onclick = (e) => {
-                e.stopPropagation();
-                closeImgModal();
-            };
-
-            imgBackdrop.onclick = (e) => {
-                if (e.target === imgBackdrop) {
-                    closeImgModal();
-                }
-            };
-        }
-
         async function showModalTyped(index) {
             const backdrop = document.getElementById('modal-backdrop');
             const modalBox = document.getElementById('modal-content-box');
@@ -1016,24 +838,6 @@
                         let liElem = document.createElement('li');
                         ulElem.appendChild(liElem);
                         await typeWriterHTML(liElem, liText, 12);
-                    }
-                } else if (item.type === 'ul_interactive') {
-                    let ulElem = document.createElement('ul');
-                    modalBody.appendChild(ulElem);
-                    for (let subItem of item.items) {
-                        let liElem = document.createElement('li');
-                        let aElem = document.createElement('a');
-                        aElem.className = 'modal-item-link';
-                        aElem.textContent = subItem.text;
-                        aElem.href = "#";
-                        aElem.onclick = (e) => {
-                            e.preventDefault();
-                            openImageModal(subItem.img, subItem.title);
-                        };
-                        liElem.appendChild(aElem);
-                        ulElem.appendChild(liElem);
-                        // Añadir un pequeño retraso mecanografiado estético para el ítem
-                        await new Promise(r => setTimeout(r, 30));
                     }
                 }
             }
