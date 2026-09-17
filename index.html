@@ -21,7 +21,6 @@
             padding: 0;
         }
 
-        /* Arquitectura de diseño directo al viewport (Igual a index01) */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: #000000;
@@ -37,7 +36,6 @@
             filter: blur(12px);
         }
 
-        /* Imagen de fondo independiente */
         .bg-image {
             position: fixed;
             top: 0;
@@ -56,7 +54,6 @@
             opacity: 1;
         }
 
-        /* Capa de desvanecimiento inicial en blanco */
         #intro-overlay {
             position: fixed;
             top: 0;
@@ -74,7 +71,6 @@
             opacity: 0;
         }
 
-        /* Header Superior Izquierda */
         .top-header {
             position: absolute;
             top: 2.5rem;
@@ -98,7 +94,6 @@
             text-decoration: underline;
         }
 
-        /* Header Superior Derecha */
         .top-header-right {
             position: absolute;
             top: 2rem;
@@ -131,7 +126,6 @@
             color: #ffffff;
         }
 
-        /* Título Principal MISIÓN (Con sombreado posterior blanco agregado) */
         .page-title {
             position: absolute;
             top: 15vh;
@@ -149,7 +143,6 @@
             z-index: 10;
         }
 
-        /* Subtítulo QUIMERA */
         .quimera-word-container {
             position: absolute;
             top: 78vh;
@@ -176,7 +169,6 @@
             transition: color 0.4s ease;
         }
 
-        /* Subtítulo de texto */
         .subtitle-text {
             position: absolute;
             top: calc(78vh + 5.0rem + 0.5rem);
@@ -192,7 +184,6 @@
             z-index: 10;
         }
 
-        /* Recuadro de instrucciones interactivo */
         .exploration-box {
             position: absolute;
             top: 92.5vh;
@@ -222,7 +213,6 @@
             margin-bottom: 0.2rem;
         }
 
-        /* Footer integrado de forma absoluta al fondo del viewport */
         footer {
             position: absolute;
             bottom: 0;
@@ -248,91 +238,27 @@
             color: #e2e8f0;
         }
 
-        /* ========================================================== */
-        /* AJUSTE ESPECÍFICO PARA RESOLUCIÓN 1920x1080px (PROYECTOR)    */
-        /* ========================================================== */
         @media (min-width: 1400px) and (max-width: 1920px) and (max-height: 1080px) {
-            .page-title {
-                top: 15vh;
-            }
-            .quimera-word-container {
-                top: 78vh;
-            }
-            .subtitle-text {
-                top: calc(78vh + 5.0rem + 0.5rem);
-            }
-            .exploration-box {
-                top: 92.5vh;
-            }
+            .page-title { top: 15vh; }
+            .quimera-word-container { top: 78vh; }
+            .subtitle-text { top: calc(78vh + 5.0rem + 0.5rem); }
+            .exploration-box { top: 92.5vh; }
         }
 
-        /* ========================================================== */
-        /* OPTIMIZACIÓN RESPONSIVO PARA MÓVILES (Estilo index01)       */
-        /* ========================================================== */
         @media (max-width: 900px) {
-            body {
-                height: auto;
-                overflow-y: auto;
-                overflow-x: hidden;
-            }
-
-            .bg-image {
-                height: 100%;
-                background-attachment: scroll;
-            }
-
-            .top-header, .top-header-right {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                right: auto !important;
-                text-align: center;
-                justify-content: center;
-                margin: 1rem 0;
-            }
-
-            .top-header-right {
-                flex-wrap: wrap;
-                gap: 0.8rem;
-            }
-
-            .page-title, .quimera-word-container, .subtitle-text, .exploration-box {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                margin: 1rem auto !important;
-                text-align: center;
-                white-space: normal !important;
-            }
-
-            .page-title {
-                font-size: 1.8rem !important;
-            }
-
-            .quimera-word-container {
-                font-size: 2.5rem !important;
-            }
-
-            .subtitle-text {
-                font-size: 1rem !important;
-                padding: 0 1rem;
-            }
-
-            .exploration-box {
-                padding: 1rem !important;
-            }
-
-            footer {
-                position: relative !important;
-                margin-top: 1.5rem;
-                padding: 1rem;
-            }
+            body { height: auto; overflow-y: auto; overflow-x: hidden; }
+            .bg-image { height: 100%; background-attachment: scroll; }
+            .top-header, .top-header-right { position: relative !important; top: auto !important; left: auto !important; right: auto !important; text-align: center; justify-content: center; margin: 1rem 0; }
+            .top-header-right { flex-wrap: wrap; gap: 0.8rem; }
+            .page-title, .quimera-word-container, .subtitle-text, .exploration-box { position: relative !important; top: auto !important; left: auto !important; transform: none !important; width: 100% !important; max-width: 100% !important; margin: 1rem auto !important; text-align: center; white-space: normal !important; }
+            .page-title { font-size: 1.8rem !important; }
+            .quimera-word-container { font-size: 2.5rem !important; }
+            .subtitle-text { font-size: 1rem !important; padding: 0 1rem; }
+            .exploration-box { padding: 1rem !important; }
+            footer { position: relative !important; margin-top: 1.5rem; padding: 1rem; }
         }
 
-        /* Recuadro Central Modal */
+        /* Recuadro Central Modal Principal */
         #modal-backdrop {
             position: fixed;
             top: 0;
@@ -379,6 +305,98 @@
 
         .modal-box.crt-exit {
             animation: tvShutdown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes tvStartup {
+            0% { transform: scale(0, 0); filter: brightness(0); opacity: 0; }
+            40% { transform: scale(0.001, 0.005); filter: brightness(5); opacity: 1; }
+            70% { transform: scale(1, 0.005); filter: brightness(3); opacity: 1; }
+            100% { transform: scale(1, 1); filter: brightness(1); opacity: 1; }
+        }
+
+        /* Submodal para Imágenes con efectos de TV */
+        #submodal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        #submodal-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .submodal-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            max-width: 85vw;
+            max-height: 85vh;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform-origin: center center;
+        }
+
+        .submodal-box.crt-enter {
+            animation: tvStartup 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .submodal-box.crt-exit {
+            animation: tvShutdown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .submodal-box img {
+            max-width: 100%;
+            max-height: 75vh;
+            border-radius: 8px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .submodal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #c88b32;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            z-index: 2010;
+            line-height: 1;
+        }
+
+        .submodal-close:hover {
+            color: #ffffff;
+        }
+
+        .modal-link {
+            color: #5eead4;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .modal-link:hover {
+            color: #ffffff;
         }
 
         @keyframes blinkCursor {
@@ -436,21 +454,15 @@
 </head>
 <body>
 
-    <!-- Elemento de Audio -->
     <audio id="bg-music" src="Quimera_Milonga_(Lado_B).mp3" loop preload="auto"></audio>
 
-    <!-- Capa de fondo animada -->
     <div class="bg-image" id="bg-image"></div>
-
-    <!-- Capa de desvanecimiento inicial en blanco -->
     <div id="intro-overlay"></div>
 
-    <!-- Header Izquierdo -->
     <header class="top-header">
         <a href="https://quimerac3.github.io/" id="header-link"></a>
     </header>
 
-    <!-- Header Derecho -->
     <div class="top-header-right">
         <a href="#" id="music-link">🎵 Música: OFF</a>
         <a href="#" id="fullscreen-link">⛶ Pantalla Completa</a>
@@ -473,11 +485,19 @@
         <p data-text="&bull; &copy; 2026 Instituto Quimera. &bull; Centro de Investigación, Docencia, Servicio y Difusión. &bull; Dr.C. Cesar Cerezo Camacho. &bull; Todos los derechos reservados. &bull;"></p>
     </footer>
 
-    <!-- Modal -->
+    <!-- Modal Principal -->
     <div id="modal-backdrop">
         <div class="modal-box" id="modal-content-box">
             <h2 id="modal-title"></h2>
             <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Submodal para Imágenes con Efectos de Televisión -->
+    <div id="submodal-backdrop">
+        <div class="submodal-box" id="submodal-content-box">
+            <span class="submodal-close" id="submodal-close-btn">&times;</span>
+            <img id="submodal-img" src="" alt="Submodal Imagen">
         </div>
     </div>
 
@@ -488,7 +508,6 @@
             }
         });
 
-        // Control de Reproducción de Música
         const music = document.getElementById('bg-music');
         const musicLink = document.getElementById('music-link');
         let isMusicPlaying = false;
@@ -509,7 +528,6 @@
             }
         });
 
-        // Control de Pantalla Completa
         const fullscreenLink = document.getElementById('fullscreen-link');
 
         fullscreenLink.addEventListener('click', (e) => {
@@ -556,19 +574,18 @@
                 content: [
                     { type: 'p', text: "La misión de Quimera se desarrolla mediante cinco procesos interrelacionados:" },
                     { type: 'ul', items: [
-                        "-01. Investigación.",
-                        "-02. Formación.",
-                        "-03. Desarrollo.",
-                        "-04. Aplicación.",
-                        "-05. Transferencia."
+                        "<a href='#' class='modal-link' data-img='Quimera_Investigacion.png'>-01. Investigación.</a>",
+                        "<a href='#' class='modal-link' data-img='Quimera_Formacion.png'>-02. Formación.</a>",
+                        "<a href='#' class='modal-link' data-img='Quimera_Desarrollo.png'>-03. Desarrollo.</a>",
+                        "<a href='#' class='modal-link' data-img='Quimera_Aplicacion.png'>-04. Aplicación.</a>",
+                        "<a href='#' class='modal-link' data-img='Quimera_Transferencia.png'>-05. Transferencia.</a>"
                     ]}
                 ]
             },
             {
                 title: "EL CICLO DE QUIMERA.",
                 content: [
-                    { type: 'p', text: `Estos procesos no funcionan como etapas asiladas.
-Forman un ciclo dinámico, el Ciclo de Quimera:` },
+                    { type: 'p', text: "Estos procesos no funcionan como etapas asiladas.\nForman un ciclo dinámico, <a href='#' class='modal-link' data-img='Quimera_Ciclo.png'>el Ciclo de Quimera</a>:" },
                     { type: 'flow', text: "INVESTIGACIÓN → CONOCIMIENTO → FORMACIÓN → DOCENCIA → CAPACIDAD → DESARROLLO → HERRAMIENTAS → APLICACIÓN → EXPERIENCIA → TRANSFERENCIA → NUEVAS PREGUNTAS → INVESTIGACIÓN" },
                     { type: 'p', text: `Cada resultado puede convertirse en el punto de partida de una nueva investigación.
 Cada problema puede generar conocimiento.
@@ -753,6 +770,25 @@ Y cada nueva pregunta puede iniciar nuevamente el proceso.` },
                     }, 500);
                 });
             }
+
+            // Manejo de eventos del submodal de imágenes
+            const subBackdrop = document.getElementById('submodal-backdrop');
+            const subCloseBtn = document.getElementById('submodal-close-btn');
+
+            if (subCloseBtn) {
+                subCloseBtn.onclick = (e) => {
+                    e.preventDefault();
+                    closeSubmodal();
+                };
+            }
+
+            if (subBackdrop) {
+                subBackdrop.onclick = (e) => {
+                    if (e.target === subBackdrop) {
+                        closeSubmodal();
+                    }
+                };
+            }
         });
 
         const letters = document.querySelectorAll('.quimera-letter');
@@ -869,6 +905,15 @@ Y cada nueva pregunta puede iniciar nuevamente el proceso.` },
                 }
             }
 
+            // Activar eventos para los hipervínculos internos (submodales de imágenes)
+            modalBody.querySelectorAll('.modal-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const imgSrc = link.getAttribute('data-img');
+                    openSubmodal(imgSrc);
+                });
+            });
+
             let closeContainer = document.createElement('div');
             closeContainer.style.textAlign = 'right';
             closeContainer.style.marginTop = '1.5rem';
@@ -918,6 +963,40 @@ Y cada nueva pregunta puede iniciar nuevamente el proceso.` },
                     triggerClose();
                 }
             };
+        }
+
+        function openSubmodal(imgSrc) {
+            const subBackdrop = document.getElementById('submodal-backdrop');
+            const subBox = subBackdrop.querySelector('.submodal-box');
+            const subImg = document.getElementById('submodal-img');
+
+            if (!subBackdrop || !subBox || !subImg) return;
+
+            // Limpieza previa obligatoria para evitar bug de imagen anterior
+            subImg.src = '';
+
+            subBox.classList.remove('crt-exit');
+            subBox.classList.add('crt-enter');
+            subBackdrop.classList.add('active');
+
+            subImg.src = imgSrc;
+        }
+
+        function closeSubmodal() {
+            const subBackdrop = document.getElementById('submodal-backdrop');
+            const subBox = subBackdrop.querySelector('.submodal-box');
+            const subImg = document.getElementById('submodal-img');
+
+            if (!subBackdrop || !subBox) return;
+
+            subBox.classList.remove('crt-enter');
+            subBox.classList.add('crt-exit');
+
+            setTimeout(() => {
+                subBackdrop.classList.remove('active');
+                subBox.classList.remove('crt-exit');
+                if (subImg) subImg.src = '';
+            }, 400);
         }
 
         function enableFinalHyperlink() {
