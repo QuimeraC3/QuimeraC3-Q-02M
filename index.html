@@ -560,15 +560,23 @@
                         "-02. Formación.",
                         "-03. Desarrollo.",
                         "-04. Aplicación.",
-                        "-05. Transferencia." }
+                        "-05. Transferencia."
+                    ]}
                 ]
             },
             {
                 title: "EL CICLO DE QUIMERA.",
                 content: [
-                    { type: 'p', text: "Estos procesos no funcionan como etapas aisladas. Forman un ciclo dinámico, el Ciclo de Quimera:" },
+                    { type: 'p', text: `Estos procesos no funcionan como etapas asiladas.
+Forman un ciclo dinámico, el Ciclo de Quimera:` },
                     { type: 'flow', text: "INVESTIGACIÓN → CONOCIMIENTO → FORMACIÓN → DOCENCIA → CAPACIDAD → DESARROLLO → HERRAMIENTAS → APLICACIÓN → EXPERIENCIA → TRANSFERENCIA → NUEVAS PREGUNTAS → INVESTIGACIÓN" },
-                    { type: 'p', text: "Cada resultado puede convertirse en el punto de partida de una nueva investigación. Cada problema puede generar conocimiento. Cada conocimiento puede convertirse en una capacidad. Cada capacidad puede producir una herramienta o solución. Cada aplicación puede generar experiencia. Cada experiencia puede producir nuevas preguntas. Y cada nueva pregunta puede iniciar nuevamente el proceso." },
+                    { type: 'p', text: `Cada resultado puede convertirse en el punto de partida de una nueva investigación.
+Cada problema puede generar conocimiento.
+Cada conocimiento puede convertirse en una capacidad.
+Cada capacidad puede producir una herramienta o solución.
+Cada aplicación puede generar experiencia.
+Cada experiencia puede producir nuevas preguntas.
+Y cada nueva pregunta puede iniciar nuevamente el proceso.` },
                     { type: 'p', text: "Por ello, Quimera entiende el conocimiento como un sistema evolutivo y no como un producto terminado." }
                 ]
             },
@@ -583,7 +591,8 @@
                         "Metodología, para convertir la intención en procesos reproducibles y evaluables.",
                         "Innovación, para desarrollar nuevas formas de comprender y resolver problemas.",
                         "Responsabilidad, para reconocer las consecuencias de aquello que investigamos.",
-                        "Transferencia, para procurar que el conocimiento pueda convertirse en capacidad y beneficio más allá de su origen." }
+                        "Transferencia, para procurar que el conocimiento pueda convertirse en capacidad y beneficio más allá de su origen."
+                    ]}
                 ]
             },
             {
@@ -605,6 +614,7 @@
         function typeWriter(elementId, text, speed = 35) {
             return new Promise(resolve => {
                 const el = document.getElementById(elementId);
+                if (!el) { resolve(); return; }
                 el.innerHTML = '';
                 el.style.opacity = 1; 
                 let i = 0;
@@ -623,6 +633,7 @@
 
         function typeWriterHTML(element, htmlString, speed = 20) {
             return new Promise(resolve => {
+                if (!element) { resolve(); return; }
                 element.innerHTML = '';
                 const tokens = htmlString.match(/(<\/?[^>]+(>|$)|[^<]+)/g) || [htmlString];
                 let tokenIdx = 0;
@@ -656,25 +667,29 @@
 
         async function runIntroSequence() {
             const whiteOverlay = document.getElementById('intro-overlay');
-            whiteOverlay.classList.add('fade-out');
+            if (whiteOverlay) whiteOverlay.classList.add('fade-out');
             await new Promise(r => setTimeout(r, 1000));
 
-            document.getElementById('bg-image').classList.add('visible');
+            const bgImage = document.getElementById('bg-image');
+            if (bgImage) bgImage.classList.add('visible');
             await new Promise(r => setTimeout(r, 1000));
 
             await typeWriter('header-link', 'QUIMERA - Inicio General', 40);
             await new Promise(r => setTimeout(r, 400));
 
-            document.getElementById('music-link').classList.add('visible');
+            const musicLink = document.getElementById('music-link');
+            if (musicLink) musicLink.classList.add('visible');
             await new Promise(r => setTimeout(r, 400));
 
-            document.getElementById('fullscreen-link').classList.add('visible');
+            const fullscreenLink = document.getElementById('fullscreen-link');
+            if (fullscreenLink) fullscreenLink.classList.add('visible');
             await new Promise(r => setTimeout(r, 600));
 
             await typeWriter('main-title', 'MISIÓN', 80);
             await new Promise(r => setTimeout(r, 400));
 
-            document.getElementById('quimera-word').classList.add('visible');
+            const quimeraWord = document.getElementById('quimera-word');
+            if (quimeraWord) quimeraWord.classList.add('visible');
             await new Promise(r => setTimeout(r, 800));
             await playQuimeraAppearanceAsync();
             await new Promise(r => setTimeout(r, 400));
@@ -682,13 +697,15 @@
             await typeWriter('sub-text', 'Un ecosistema para el conocimiento, la formación y la práctica interdisciplinaria.', 35);
             await new Promise(r => setTimeout(r, 400));
 
-            document.getElementById('exp-box').classList.add('visible');
+            const expBox = document.getElementById('exp-box');
+            if (expBox) expBox.classList.add('visible');
             await new Promise(r => setTimeout(r, 600));
 
             await typeWriter('exp-title', 'EXPLORACIÓN INTERACTIVA: Una vez que la palabra QUIMERA cambie de color a blanco, seleccione la letra parpadeante para descubrir: ¿Qué es QUIMERA?', 25);
             await new Promise(r => setTimeout(r, 400));
 
-            document.querySelector('footer').classList.add('visible');
+            const footer = document.querySelector('footer');
+            if (footer) footer.classList.add('visible');
             await new Promise(r => setTimeout(r, 600));
 
             await new Promise(resolveFooter => {
@@ -721,16 +738,21 @@
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(runIntroSequence, 400);
 
-            document.getElementById('header-link').addEventListener('click', (e) => {
-                e.preventDefault();
-                const overlay = document.getElementById('intro-overlay');
-                overlay.style.background = '#ffffff';
-                overlay.style.opacity = '1';
-                overlay.classList.remove('fade-out');
-                setTimeout(() => {
-                    window.location.href = "https://quimerac3.github.io/";
-                }, 500);
-            });
+            const headerLink = document.getElementById('header-link');
+            if (headerLink) {
+                headerLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const overlay = document.getElementById('intro-overlay');
+                    if (overlay) {
+                        overlay.style.background = '#ffffff';
+                        overlay.style.opacity = '1';
+                        overlay.classList.remove('fade-out');
+                    }
+                    setTimeout(() => {
+                        window.location.href = "https://quimerac3.github.io/";
+                    }, 500);
+                });
+            }
         });
 
         const letters = document.querySelectorAll('.quimera-letter');
@@ -772,6 +794,7 @@
         function activateCurrentLetter() {
             if (currentLetterIndex >= letters.length) return;
             const targetLetter = letters[currentLetterIndex];
+            if (!targetLetter) return;
             let isWhite = true;
 
             activeBlinkInterval = setInterval(() => {
@@ -785,6 +808,7 @@
 
         function handleLetterClick(index) {
             const targetLetter = letters[index];
+            if (!targetLetter) return;
             targetLetter.onclick = null;
             clearInterval(activeBlinkInterval);
 
@@ -808,6 +832,8 @@
             const modalTitle = document.getElementById('modal-title');
             const modalBody = document.getElementById('modal-body');
 
+            if (!backdrop || !modalBox || !modalTitle || !modalBody) return;
+
             modalBox.classList.remove('crt-exit');
             modalBox.style.opacity = '1';
             modalBox.style.transform = 'scale(1,1)';
@@ -818,6 +844,7 @@
             backdrop.classList.add('active');
 
             const data = modalData[index];
+            if (!data) return;
             
             await typeWriterHTML(modalTitle, data.title, 25);
 
@@ -873,7 +900,7 @@
                 setTimeout(() => {
                     backdrop.classList.remove('active');
 
-                    letters[index].style.color = '#c88b32';
+                    if (letters[index]) letters[index].style.color = '#c88b32';
                     currentLetterIndex++;
                     selectedCount++;
 
@@ -895,6 +922,7 @@
 
         function enableFinalHyperlink() {
             const wordContainer = document.getElementById('quimera-word');
+            if (!wordContainer) return;
             wordContainer.style.cursor = 'pointer';
 
             const stepTime = 500 / letters.length;
@@ -903,7 +931,7 @@
                 let i = 0;
                 function turnCopperGold(callback) {
                     if (i < letters.length) {
-                        letters[i].style.color = '#c88b32';
+                        if (letters[i]) letters[i].style.color = '#c88b32';
                         i++;
                         globalColorInterval = setTimeout(() => turnCopperGold(callback), stepTime);
                     } else if (callback) {
@@ -914,7 +942,7 @@
                 let j = 0;
                 function turnWhite(callback) {
                     if (j < letters.length) {
-                        letters[j].style.color = '#ffffff';
+                        if (letters[j]) letters[j].style.color = '#ffffff';
                         j++;
                         globalColorInterval = setTimeout(() => turnWhite(callback), stepTime);
                     } else if (callback) {
@@ -939,9 +967,11 @@
                 document.body.classList.add('blurring');
 
                 const overlay = document.getElementById('intro-overlay');
-                overlay.style.background = '#ffffff';
-                overlay.style.opacity = '1';
-                overlay.classList.remove('fade-out');
+                if (overlay) {
+                    overlay.style.background = '#ffffff';
+                    overlay.style.opacity = '1';
+                    overlay.classList.remove('fade-out');
+                }
 
                 setTimeout(() => {
                     window.location.href = "https://quimerac3.github.io/QuimeraC3-Q/";
