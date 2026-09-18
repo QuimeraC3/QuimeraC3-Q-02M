@@ -585,7 +585,7 @@
             {
                 title: "EL CICLO DE QUIMERA.",
                 content: [
-                    { type: 'p', text: "Estos procesos no funcionan como etapas asiladas.\nForman un ciclo dinámico, <a href='#' class='modal-link' data-img='Quimera_Ciclo.png'>EL CICLO DE QUIMERA</a>:" },
+                    { type: 'p', text: "Estos procesos no funcionan como etapas aisladas. Forman un ciclo dinámico, <a href='#' class='modal-link' data-img='Quimera_Ciclo.png'>EL CICLO DE QUIMERA</a>:" },
                     { type: 'flow', text: "INVESTIGACIÓN → CONOCIMIENTO → FORMACIÓN → DOCENCIA → CAPACIDAD → DESARROLLO → HERRAMIENTAS → APLICACIÓN → EXPERIENCIA → TRANSFERENCIA → NUEVAS PREGUNTAS → INVESTIGACIÓN" },
                     { type: 'p', text: `Cada resultado puede convertirse en el punto de partida de una nueva investigación.
 Cada problema puede generar conocimiento.
@@ -652,33 +652,61 @@ Y cada nueva pregunta puede iniciar nuevamente el proceso.` },
             return new Promise(resolve => {
                 if (!element) { resolve(); return; }
                 element.innerHTML = '';
-                const tokens = htmlString.match(/(<\/?[^>]+(>|$)|[^<]+)/g) || [htmlString];
-                let tokenIdx = 0;
-                let charIdx = 0;
                 
-                function type() {
-                    if (tokenIdx < tokens.length) {
-                        let currentToken = tokens[tokenIdx];
-                        if (currentToken.startsWith('<')) {
-                            element.innerHTML += currentToken;
-                            tokenIdx++;
-                            setTimeout(type, speed);
-                        } else {
-                            if (charIdx < currentToken.length) {
-                                element.innerHTML += currentToken.charAt(charIdx);
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(`<div>${htmlString}</div>`, 'text/html');
+                const fragmentNodes = Array.from(doc.body.firstChild.childNodes);
+                
+                let nodeIndex = 0;
+                
+                function processNextNode() {
+                    if (nodeIndex >= fragmentNodes.length) {
+                        resolve();
+                        return;
+                    }
+                    
+                    const node = fragmentNodes[nodeIndex];
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        const text = node.textContent;
+                        let charIdx = 0;
+                        const textNode = document.createTextNode('');
+                        element.appendChild(textNode);
+                        
+                        function typeChar() {
+                            if (charIdx < text.length) {
+                                textNode.nodeValue += text.charAt(charIdx);
                                 charIdx++;
-                                setTimeout(type, speed);
+                                setTimeout(typeChar, speed);
                             } else {
-                                charIdx = 0;
-                                tokenIdx++;
-                                setTimeout(type, speed);
+                                nodeIndex++;
+                                processNextNode();
                             }
                         }
+                        typeChar();
+                    } else if (node.nodeType === Node.ELEMENT_NODE) {
+                        const clonedElem = node.cloneNode(false);
+                        element.appendChild(clonedElem);
+                        const innerHTML = node.innerHTML;
+                        let charIdx = 0;
+                        
+                        function typeElemContent() {
+                            if (charIdx <= innerHTML.length) {
+                                clonedElem.innerHTML = innerHTML.substring(0, charIdx);
+                                charIdx++;
+                                setTimeout(typeElemContent, speed);
+                            } else {
+                                nodeIndex++;
+                                processNextNode();
+                            }
+                        }
+                        typeElemContent();
                     } else {
-                        resolve();
+                        nodeIndex++;
+                        processNextNode();
                     }
                 }
-                type();
+                
+                processNextNode();
             });
         }
 
