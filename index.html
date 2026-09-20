@@ -81,7 +81,7 @@
         .top-header a {
             color: #ffffff;
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 1.5vw, 1.2rem);
             font-weight: 700;
             text-decoration: none;
             letter-spacing: -0.01em;
@@ -106,7 +106,7 @@
         .top-header-right a {
             color: #ffffff;
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 0.9rem;
+            font-size: clamp(0.75rem, 1.2vw, 1rem);
             font-weight: 700;
             text-decoration: none;
             opacity: 0;
@@ -132,7 +132,7 @@
             left: 52%;
             transform: translateX(-50%);
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 5rem;
+            font-size: clamp(2rem, 6vw, 5rem);
             font-weight: 700;
             letter-spacing: 0.5em;
             text-transform: uppercase;
@@ -149,7 +149,6 @@
             left: 51%;
             transform: translateX(-50%);
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 5rem;
             font-weight: 700;
             letter-spacing: 0.25em;
             cursor: default;
@@ -157,6 +156,10 @@
             transition: opacity 0.8s ease;
             white-space: nowrap;
             z-index: 10;
+            font-size: clamp(2.5rem, 10vw, 6rem); 
+            line-height: 1.1;
+            -webkit-text-stroke: 1.5px #000000;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 1.0);
         }
 
         .quimera-word-container.visible {
@@ -174,7 +177,7 @@
             top: calc(78vh + 5.0rem + 0.5rem);
             left: 51%;
             transform: translateX(-50%);
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 2vw, 1.4rem);
             line-height: 1.5;
             max-width: 900px;
             width: 90%;
@@ -195,7 +198,7 @@
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 1.5vw, 1.1rem);
             color: #cbd5e1;
             opacity: 0;
             transition: opacity 0.8s ease;
@@ -224,7 +227,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.2);
             text-align: center;
             color: #ffffff;
-            font-size: 0.85rem;
+            font-size: clamp(0.7rem, 1vw, 0.95rem);
             opacity: 0;
             transition: opacity 500ms ease;
             z-index: 100;
@@ -251,9 +254,7 @@
             .top-header, .top-header-right { position: relative !important; top: auto !important; left: auto !important; right: auto !important; text-align: center; justify-content: center; margin: 1rem 0; }
             .top-header-right { flex-wrap: wrap; gap: 0.8rem; }
             .page-title, .quimera-word-container, .subtitle-text, .exploration-box { position: relative !important; top: auto !important; left: auto !important; transform: none !important; width: 100% !important; max-width: 100% !important; margin: 1rem auto !important; text-align: center; white-space: normal !important; }
-            .page-title { font-size: 1.8rem !important; }
-            .quimera-word-container { font-size: 2.5rem !important; }
-            .subtitle-text { font-size: 1rem !important; padding: 0 1rem; }
+            .subtitle-text { padding: 0 1rem; }
             .exploration-box { padding: 1rem !important; }
             footer { position: relative !important; margin-top: 1.5rem; padding: 1rem; }
         }
@@ -374,7 +375,7 @@
             top: 10px;
             right: 15px;
             color: #c88b32;
-            font-size: 2rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: bold;
             cursor: pointer;
             text-decoration: none;
@@ -406,7 +407,7 @@
 
         .modal-box h2 {
             font-family: Georgia, "Times New Roman", serif;
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
             color: #c88b32;
             margin-bottom: 1rem;
             padding-bottom: 0.4rem;
@@ -415,7 +416,7 @@
         }
 
         .modal-box p, .modal-box li {
-            font-size: 1.02rem;
+            font-size: clamp(0.95rem, 1.5vw, 1.15rem);
             color: #f1f5f9;
             margin-bottom: 1rem;
             line-height: 1.6;
@@ -432,7 +433,7 @@
             padding: 1rem;
             border-radius: 4px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: clamp(0.85rem, 1.5vw, 1.05rem);
             text-align: center;
             margin: 1rem 0;
             color: #5eead4;
