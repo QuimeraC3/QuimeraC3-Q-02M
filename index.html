@@ -71,13 +71,13 @@
             opacity: 0;
         }
 
-        /* --- HEADER UNIFICADO --- */
+        /* --- HEADER UNIFICADO (Base index02) --- */
         .top-header {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 2.5rem 3rem;
+            padding: 0.85rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -87,7 +87,7 @@
         .top-header a#header-link {
             color: #ffffff;
             font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(0.85rem, 1.5vw, 1.2rem);
+            font-size: clamp(0.85rem, 2vw, 1rem);
             font-weight: 700;
             text-decoration: none;
             letter-spacing: -0.01em;
@@ -102,20 +102,20 @@
 
         .top-header-right {
             display: flex;
-            gap: 1rem;
+            gap: clamp(0.5rem, 2vw, 1.25rem);
+            align-items: center;
         }
 
         .top-header-right a {
             color: #ffffff;
             font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(0.75rem, 1.2vw, 1rem);
-            font-weight: 700;
-            text-decoration: none;
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            font-weight: 500;
             opacity: 0;
-            transition: opacity 0.8s ease, background-color 0.3s ease;
+            transition: opacity 0.8s ease, background-color 0.3s ease, color 0.2s ease;
             background: rgba(15, 118, 110, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 0.4rem 1rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
         }
 
@@ -124,7 +124,7 @@
         }
 
         .top-header-right a:hover {
-            background: var(--primary);
+            background: var(--accent);
             color: #ffffff;
         }
 
@@ -569,7 +569,7 @@
                 content: [
                     { type: 'p', text: "Quimera existe porque el conocimiento adquiere verdadero valor cuando puede ser comprendido, conectado, desarrollado, aplicado y transferido." },
                     { type: 'p', text: "Los problemas científicos, médicos, académicos y profesionales rara vez pertenecen a una sola disciplina. Su complejidad exige integrar conocimientos, establecer relaciones, formular mejores preguntas y desarrollar métodos que permitan transformar información en comprensión y comprensión en acción." },
-                    { type: 'p', text: "Por ello, Quimera não busca únicamente acumular conocimiento: busca generarlo, integrarlo, desarrollarlo y transferirlo de manera rigurosa, crítica y responsable." }
+                    { type: 'p', text: "Por ello, Quimera no busca únicamente acumular conocimiento: busca generarlo, integrarlo, desarrollarlo y transferirlo de manera rigurosa, crítica y responsable." }
                 ]
             },
             {
