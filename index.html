@@ -71,14 +71,20 @@
             opacity: 0;
         }
 
+        /* --- HEADER UNIFICADO --- */
         .top-header {
             position: absolute;
-            top: 2.5rem;
-            left: 3rem;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 100;
         }
 
-        .top-header a {
+        .top-header a#header-link {
             color: #ffffff;
             font-family: Georgia, "Times New Roman", serif;
             font-size: clamp(0.85rem, 1.5vw, 1.2rem);
@@ -89,16 +95,12 @@
             opacity: 0;
         }
 
-        .top-header a:hover {
+        .top-header a#header-link:hover {
             color: #38bdf8;
             text-decoration: underline;
         }
 
         .top-header-right {
-            position: absolute;
-            top: 2rem;
-            right: 3rem;
-            z-index: 100;
             display: flex;
             gap: 1rem;
         }
@@ -258,8 +260,8 @@
         @media (max-width: 900px) {
             body { height: auto; overflow-y: auto; overflow-x: hidden; }
             .bg-image { height: 100%; background-attachment: scroll; }
-            .top-header, .top-header-right { position: relative !important; top: auto !important; left: auto !important; right: auto !important; text-align: center; justify-content: center; margin: 1rem 0; }
-            .top-header-right { flex-wrap: wrap; gap: 0.8rem; }
+            .top-header { position: relative !important; top: auto !important; left: auto !important; flex-direction: column; gap: 1rem; padding: 1.5rem 1rem; text-align: center; justify-content: center; }
+            .top-header-right { flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
             .page-title, .quimera-word-container, .subtitle-text, .exploration-box { position: relative !important; top: auto !important; left: auto !important; transform: none !important; width: 100% !important; max-width: 100% !important; margin: 1rem auto !important; text-align: center; white-space: normal !important; }
             .subtitle-text { padding: 0 1rem; }
             .exploration-box { padding: 1rem !important; }
@@ -467,14 +469,14 @@
     <div class="bg-image" id="bg-image"></div>
     <div id="intro-overlay"></div>
 
+    <!-- HEADER UNIFICADO -->
     <header class="top-header">
         <a href="https://quimerac3.github.io/" id="header-link"></a>
+        <div class="top-header-right">
+            <a href="#" id="music-link">🎵 Música: OFF</a>
+            <a href="#" id="fullscreen-link">⛶ Pantalla Completa</a>
+        </div>
     </header>
-
-    <div class="top-header-right">
-        <a href="#" id="music-link">🎵 Música: OFF</a>
-        <a href="#" id="fullscreen-link">⛶ Pantalla Completa</a>
-    </div>
 
     <h1 class="page-title" id="main-title"></h1>
 
@@ -567,7 +569,7 @@
                 content: [
                     { type: 'p', text: "Quimera existe porque el conocimiento adquiere verdadero valor cuando puede ser comprendido, conectado, desarrollado, aplicado y transferido." },
                     { type: 'p', text: "Los problemas científicos, médicos, académicos y profesionales rara vez pertenecen a una sola disciplina. Su complejidad exige integrar conocimientos, establecer relaciones, formular mejores preguntas y desarrollar métodos que permitan transformar información en comprensión y comprensión en acción." },
-                    { type: 'p', text: "Por ello, Quimera no busca únicamente acumular conocimiento: busca generarlo, integrarlo, desarrollarlo y transferirlo de manera rigurosa, crítica y responsable." }
+                    { type: 'p', text: "Por ello, Quimera não busca únicamente acumular conocimiento: busca generarlo, integrarlo, desarrollarlo y transferirlo de manera rigurosa, crítica y responsable." }
                 ]
             },
             {
