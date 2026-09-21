@@ -132,15 +132,19 @@
             left: 52%;
             transform: translateX(-50%);
             font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(2rem, 6vw, 5rem);
+            font-size: clamp(2.5rem, 10vw, 6rem);
             font-weight: 700;
             letter-spacing: 0.5em;
             text-transform: uppercase;
-            color: #e5ab4b;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.85), 0 0 25px rgba(255, 255, 255, 0.5), 0 2px 8px rgba(0, 0, 0, 1.0);
+            color: #e2a547;
+            display: inline-block;
+            line-height: 1.1;
+            -webkit-text-stroke: 1.5px #ffffff;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
             white-space: nowrap;
             opacity: 0;
             z-index: 10;
+            transition: color 0.3s ease;
         }
 
         .quimera-word-container {
@@ -242,7 +246,10 @@
         }
 
         @media (min-width: 1400px) and (max-width: 1920px) and (max-height: 1080px) {
-            .page-title { top: 12vh; }
+            .page-title { 
+                top: 12vh; 
+                font-size: 5rem; 
+            }
             .quimera-word-container { top: 77.7vh; }
             .subtitle-text { top: calc(77.7vh + 5.5rem + 0.5rem); }
             .exploration-box { top: 92.5vh; }
@@ -802,7 +809,6 @@
                 });
             }
 
-            // Manejo de eventos del submodal de imágenes
             const subBackdrop = document.getElementById('submodal-backdrop');
             const subCloseBtn = document.getElementById('submodal-close-btn');
 
@@ -936,7 +942,6 @@
                 }
             }
 
-            // Activar eventos para los hipervínculos internos (submodales de imágenes)
             modalBody.querySelectorAll('.modal-link').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1003,7 +1008,6 @@
 
             if (!subBackdrop || !subBox || !subImg) return;
 
-            // Limpieza previa obligatoria para evitar bug de imagen anterior
             subImg.src = '';
 
             subBox.classList.remove('crt-exit');
