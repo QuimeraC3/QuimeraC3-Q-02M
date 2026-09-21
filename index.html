@@ -194,18 +194,19 @@
             z-index: 10;
         }
 
+        /* Parámetros corregidos del Recuadro de Exploración (Tomados de index01) */
         .exploration-box {
             position: absolute;
             top: 92.5vh;
-            left: 51%;
+            left: 50%;
             transform: translateX(-50%);
-            max-width: 1300px;
+            max-width: 1100px;
             width: 100%;
             padding: 0.2rem 0.2rem;
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 8px;
-            font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
             color: #cbd5e1;
             opacity: 0;
             transition: opacity 0.8s ease;
@@ -223,6 +224,7 @@
             margin-bottom: 0.2rem;
         }
 
+        /* Parámetros corregidos del Footer (Tomados de index01) */
         footer {
             position: absolute;
             bottom: 0;
@@ -234,7 +236,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.2);
             text-align: center;
             color: #ffffff;
-            font-size: clamp(0.7rem, 1vw, 0.95rem);
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
             opacity: 0;
             transition: opacity 500ms ease;
             z-index: 100;
@@ -458,7 +460,7 @@
             transition: color 0.2s ease;
         }
 
-        .close-link:hover {
+.close-link:hover {
             color: #e0a96d;
         }
     </style>
