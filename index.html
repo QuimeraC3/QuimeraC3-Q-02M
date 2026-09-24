@@ -298,7 +298,7 @@
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.8s ease;
+            transition: opacity 0.4s ease;
         }
 
         #modal-backdrop.active {
@@ -321,6 +321,7 @@
             transform-origin: center center;
         }
 
+        /* EFECTOS CRT DE TELEVISIÓN ANTIGUA */
         @keyframes tvShutdown {
             0% { transform: scale(1, 1); filter: brightness(1); opacity: 1; }
             40% { transform: scale(1, 0.005); filter: brightness(3); opacity: 1; }
@@ -328,15 +329,19 @@
             100% { transform: scale(0, 0); filter: brightness(0); opacity: 0; }
         }
 
-        .modal-box.crt-exit {
-            animation: tvShutdown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
         @keyframes tvStartup {
             0% { transform: scale(0, 0); filter: brightness(0); opacity: 0; }
-            40% { transform: scale(0.001, 0.005); filter: brightness(5); opacity: 1; }
-            70% { transform: scale(1, 0.005); filter: brightness(3); opacity: 1; }
+            30% { transform: scale(0.001, 0.005); filter: brightness(5); opacity: 1; }
+            60% { transform: scale(1, 0.005); filter: brightness(3); opacity: 1; }
             100% { transform: scale(1, 1); filter: brightness(1); opacity: 1; }
+        }
+
+        .modal-box.crt-enter {
+            animation: tvStartup 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .modal-box.crt-exit {
+            animation: tvShutdown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         /* Submodal para Imágenes con efectos de TV */
@@ -936,9 +941,9 @@
 
             if (!backdrop || !modalBox || !modalTitle || !modalBody) return;
 
+            // Aplica la animación de entrada (TV Antigua invertido / encendido)
             modalBox.classList.remove('crt-exit');
-            modalBox.style.opacity = '1';
-            modalBox.style.transform = 'scale(1,1)';
+            modalBox.classList.add('crt-enter');
             
             modalTitle.innerHTML = "";
             modalBody.innerHTML = "";
@@ -1005,11 +1010,12 @@
                 closeBtn.onclick = null;
                 backdrop.onclick = null;
 
+                // Aplica la animación de salida (TV Antigua / apagado) y desvanece el fondo
+                modalBox.classList.remove('crt-enter');
                 modalBox.classList.add('crt-exit');
+                backdrop.classList.remove('active');
 
                 setTimeout(() => {
-                    backdrop.classList.remove('active');
-
                     if (letters[index]) letters[index].style.color = '#c88b32';
                     currentLetterIndex++;
                     selectedCount++;
@@ -1020,6 +1026,10 @@
                         enableFinalHyperlink();
                     }
                 }, 400);
+
+                setTimeout(() => {
+                    modalBox.classList.remove('crt-exit');
+                }, 450);
             };
 
             closeBtn.onclick = triggerClose;
@@ -1039,6 +1049,7 @@
 
             subImg.src = '';
 
+            // Entrada de submodal con TV Invertido
             subBox.classList.remove('crt-exit');
             subBox.classList.add('crt-enter');
             subBackdrop.classList.add('active');
@@ -1053,11 +1064,12 @@
 
             if (!subBackdrop || !subBox) return;
 
+            // Salida de submodal con TV Apagado
             subBox.classList.remove('crt-enter');
             subBox.classList.add('crt-exit');
+            subBackdrop.classList.remove('active');
 
             setTimeout(() => {
-                subBackdrop.classList.remove('active');
                 subBox.classList.remove('crt-exit');
                 if (subImg) subImg.src = '';
             }, 400);
