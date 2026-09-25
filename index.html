@@ -451,6 +451,10 @@
             line-height: 1.6;
         }
 
+        #modal-body.centered-text p {
+            text-align: center;
+        }
+
         .modal-box ul {
             padding-left: 1.25rem;
             margin-bottom: 1rem;
@@ -653,14 +657,16 @@
                 content: [
                     { type: 'p', text: "Quimera existe para responder preguntas complejas sin reducirlas artificialmente a respuestas simples." },
                     { type: 'p', text: "Existimos para transformar preguntas en conocimiento, conocimiento en comprensión, comprensión en capacidad, y capacidad en práctica responsable." },
-                    { type: 'p', text: "Porque comprender no es el final del proceso:" },
-                    { type: 'p', text: "Es el punto desde el cual comienza la transformación." }
+                    { type: 'p', text: "Porque COMPRENDER no es el final del proceso:" },
+                    { type: 'p', text: "Es el punto desde el cual COMIENZA LA TRANSFORMACIÓN." }
                 ]
             },
             {
                 title: "MISIÓN EN UNA SOLA FRASE.",
+                centered: true,
                 content: [
-                    { type: 'p', text: "EXISTIMOS PARA TRANSFORMAR CONOCIMIENTO RIGUROSO EN: COMPRENSIÓN, CAPACIDAD Y PRÁCTICA RESPONSABLE." }
+                    { type: 'p', text: "EXISTIMOS PARA TRANSFORMAR CONOCIMIENTO RIGUROSO EN:" },
+                    { type: 'p', text: "COMPRENSIÓN, CAPACIDAD Y PRÁCTICA RESPONSABLE." }
                 ]
             }
         ];
@@ -955,6 +961,12 @@
 
             const data = modalData[index];
             if (!data) return;
+
+            if (data.centered) {
+                modalBody.classList.add('centered-text');
+            } else {
+                modalBody.classList.remove('centered-text');
+            }
             
             await typeWriterHTML(modalTitle, data.title, 25);
 
