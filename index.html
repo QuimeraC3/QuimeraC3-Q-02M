@@ -36,6 +36,19 @@
             filter: blur(12px);
         }
 
+        /* LIENZO MATRIX RAIN */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
         .bg-image {
             position: fixed;
             top: 0;
@@ -45,7 +58,7 @@
             background: linear-gradient(rgba(11, 19, 41, 0.01), rgba(11, 19, 41, 0.01)), url('Quimera_Mision.webp');
             background-size: cover;
             background-position: center center;
-            z-index: -1;
+            z-index: 0;
             opacity: 0;
             transition: opacity 1.5s ease;
         }
@@ -71,7 +84,7 @@
             opacity: 0;
         }
 
-        /* --- HEADER UNIFICADO (Base indexV) --- */
+        /* --- HEADER UNIFICADO --- */
         .top-bar {
             background-color: rgba(11, 19, 41, 0.0);
             padding: 0.85rem 2rem;
@@ -81,7 +94,7 @@
             width: 100%;
             z-index: 100;
             opacity: 0;
-            transition: opacity 500ms ease, filter 0.5s ease;
+            transition: opacity 1s ease, filter 0.5s ease;
         }
 
         .top-bar-container {
@@ -159,7 +172,7 @@
             white-space: nowrap;
             opacity: 0;
             z-index: 10;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, opacity 1s ease;
         }
 
         .quimera-word-container {
@@ -204,6 +217,7 @@
             text-align: center;
             opacity: 0;
             z-index: 10;
+            transition: opacity 1s ease;
         }
 
         /* Parámetros del Recuadro de Exploración */
@@ -221,7 +235,7 @@
             font-size: clamp(0.8rem, 1.5vw, 0.9rem);
             color: #cbd5e1;
             opacity: 0;
-            transition: opacity 0.8s ease;
+            transition: opacity 1s ease;
             text-align: center;
             z-index: 10;
         }
@@ -250,7 +264,7 @@
             color: #ffffff;
             font-size: clamp(0.7rem, 1.2vw, 0.85rem);
             opacity: 0;
-            transition: opacity 500ms ease;
+            transition: opacity 1s ease;
             z-index: 100;
         }
 
@@ -436,7 +450,7 @@
 
         .modal-box h2 {
             font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(1.2rem, 3vw, 1.5rem); /* Ajustado a indexQE */
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             color: #c88b32;
             margin-bottom: 1rem;
             padding-bottom: 0.4rem;
@@ -445,7 +459,7 @@
         }
 
         .modal-box p, .modal-box li {
-            font-size: clamp(0.9rem, 2vw, 1.02rem); /* Ajustado a indexQE */
+            font-size: clamp(0.9rem, 2vw, 1.02rem);
             color: #f1f5f9;
             margin-bottom: 1rem;
             line-height: 1.6;
@@ -466,7 +480,7 @@
             padding: 1rem;
             border-radius: 4px;
             font-weight: 600;
-            font-size: clamp(0.8rem, 1.5vw, 0.9rem); /* Ajustado a indexQE */
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
             text-align: center;
             margin: 1rem 0;
             color: #5eead4;
@@ -490,10 +504,11 @@
 
     <audio id="bg-music" src="Quimera_Milonga_(Lado_B).mp3" loop preload="auto"></audio>
 
+    <canvas id="matrix-canvas"></canvas>
     <div class="bg-image" id="bg-image"></div>
     <div id="intro-overlay"></div>
 
-    <!-- HEADER UNIFICADO (Base indexV) -->
+    <!-- HEADER UNIFICADO -->
     <nav class="top-bar">
         <div class="top-bar-container">
             <a href="https://quimerac3.github.io/" class="brand-logo" data-text="QUIMERA - Inicio General"></a>
@@ -543,6 +558,50 @@
                 window.location.reload();
             }
         });
+
+        /* --- CONTROL DE LLUVIA MATRIX (COLOR DORADO/COBRE) --- */
+        const matrixCanvas = document.getElementById('matrix-canvas');
+        const matrixCtx = matrixCanvas ? matrixCanvas.getContext('2d') : null;
+        let matrixInterval = null;
+
+        function resizeMatrix() {
+            if (!matrixCanvas) return;
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeMatrix);
+
+        function startMatrixRain() {
+            if (!matrixCanvas || !matrixCtx) return;
+            resizeMatrix();
+            matrixCanvas.style.opacity = '1';
+
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZQUIMERA';
+            const fontSize = 16;
+            const columns = Math.floor(matrixCanvas.width / fontSize);
+            const drops = Array(columns).fill(1);
+
+            if (matrixInterval) clearInterval(matrixInterval);
+
+            matrixInterval = setInterval(() => {
+                matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+                matrixCtx.fillStyle = '#c88b32'; // Dorado / Cobre Matrix
+                matrixCtx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                    matrixCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                    if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }, 33);
+        }
 
         const music = document.getElementById('bg-music');
         const audioToggle = document.getElementById('audio-toggle');
@@ -638,7 +697,7 @@
                 ]
             },
             {
-                title: "NUESTRO COMPROMISO.",
+                title: "NUESTROS COMPROMISOS.",
                 content: [
                     { type: 'p', text: "QUIMERA se compromete a desarrollar conocimiento con:" },
                     { type: 'ul', items: [
@@ -928,6 +987,35 @@
             targetLetter.onclick = null;
             clearInterval(activeBlinkInterval);
 
+            // Si es la letra 'A' (índice 6), se desvanecen los elementos secundarios y se activa Matrix Rain
+            if (index === 6) {
+                const bgImage = document.getElementById('bg-image');
+                if (bgImage) bgImage.classList.remove('visible');
+
+                const topBar = document.querySelector('.top-bar');
+                if (topBar) topBar.style.opacity = '0';
+
+                const mainTitle = document.getElementById('main-title');
+                if (mainTitle) mainTitle.style.opacity = '0';
+
+                const subText = document.getElementById('sub-text');
+                if (subText) subText.style.opacity = '0';
+
+                const expBox = document.getElementById('exp-box');
+                if (expBox) {
+                    expBox.classList.remove('visible');
+                    expBox.style.opacity = '0';
+                }
+
+                const footer = document.querySelector('footer');
+                if (footer) {
+                    footer.classList.remove('visible');
+                    footer.style.opacity = '0';
+                }
+
+                startMatrixRain();
+            }
+
             let blinks = 0;
             let isWhite = false;
             const blinkFive = setInterval(() => {
@@ -950,7 +1038,7 @@
 
             if (!backdrop || !modalBox || !modalTitle || !modalBody) return;
 
-            // Aplica la animación de entrada (TV Antigua invertido / encendido)
+            // Entrada del modal (TV Antigua encendido)
             modalBox.classList.remove('crt-exit');
             modalBox.classList.add('crt-enter');
             
@@ -1025,7 +1113,7 @@
                 closeBtn.onclick = null;
                 backdrop.onclick = null;
 
-                // Aplica la animación de salida (TV Antigua / apagado) y desvanece el fondo
+                // Salida con efecto TV Antigua (Shutdown)
                 modalBox.classList.remove('crt-enter');
                 modalBox.classList.add('crt-exit');
                 backdrop.classList.remove('active');
@@ -1064,7 +1152,6 @@
 
             subImg.src = '';
 
-            // Entrada de submodal con TV Invertido
             subBox.classList.remove('crt-exit');
             subBox.classList.add('crt-enter');
             subBackdrop.classList.add('active');
@@ -1079,7 +1166,6 @@
 
             if (!subBackdrop || !subBox) return;
 
-            // Salida de submodal con TV Apagado
             subBox.classList.remove('crt-enter');
             subBox.classList.add('crt-exit');
             subBackdrop.classList.remove('active');
