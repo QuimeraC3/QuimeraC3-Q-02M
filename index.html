@@ -50,7 +50,7 @@
             opacity: 0.65;
         }
 
-        /* Capa de fondo específica de Misión, estática y nítida */
+        /* Capa de fondo estática, nítida y completa (Misión) */
         .bg-image {
             position: fixed;
             top: 0;
@@ -234,7 +234,7 @@
             color: #ffffff;
         }
 
-        /* EFECTO LÁSER DE COMBUSTIÓN */
+        /* EFECTO LÁSER COMÚN */
         .laser-burn-effect {
             opacity: 0;
             clip-path: inset(0 100% 0 0);
@@ -430,7 +430,7 @@
             footer.laser-burn-effect { position: relative !important; margin-top: 1.5rem; padding: 1rem; bottom: auto !important; left: auto !important; }
         }
 
-        /* Modal Principal */
+        /* MODAL PRINCIPAL CON IMAGEN DE FONDO QUIMERA_QE_MOD.JPG */
         #modal-backdrop {
             position: fixed;
             top: 0;
@@ -454,7 +454,9 @@
         }
 
         .modal-box {
-            background: var(--card-bg);
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('Quimera_QE_Mod.jpg');
+            background-size: cover;
+            background-position: center center;
             border: 1px solid var(--card-border);
             border-radius: 12px;
             padding: 2.5rem;
@@ -466,6 +468,83 @@
             max-height: 85vh;
             overflow-y: auto;
             transform-origin: center center;
+        }
+
+        /* Submodal para Imágenes intermedias con efectos de TV */
+        #submodal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        #submodal-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .submodal-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            max-width: 85vw;
+            max-height: 85vh;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform-origin: center center;
+        }
+
+        .submodal-box img {
+            max-width: 100%;
+            max-height: 75vh;
+            border-radius: 8px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .submodal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #c88b32;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            z-index: 2010;
+            line-height: 1;
+        }
+
+        .submodal-close:hover {
+            color: #ffffff;
+        }
+
+        .modal-link {
+            color: #c88b32;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .modal-link:hover {
+            color: #ffffff;
         }
 
         @keyframes tvShutdown {
@@ -482,12 +561,12 @@
             100% { transform: scale(1, 1); filter: brightness(1); opacity: 1; }
         }
 
-        .modal-box.crt-entry {
+        .modal-box.crt-entry, .submodal-box.crt-entry {
             animation: tvTurnOn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards, hologramBoxGlow 3s ease-in-out infinite alternate;
             animation-delay: 0s, 0.4s;
         }
 
-        .modal-box.crt-exit {
+        .modal-box.crt-exit, .submodal-box.crt-exit {
             animation: tvShutdown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
@@ -542,91 +621,6 @@
         }
 
         .close-link:hover { color: #e0a96d; }
-
-        .modal-link {
-            color: #c88b32;
-            text-decoration: underline;
-            cursor: pointer;
-            font-weight: 600;
-            transition: color 0.2s ease;
-        }
-
-        .modal-link:hover {
-            color: #ffffff;
-        }
-
-        /* Submodal para Imágenes con efectos de TV */
-        #submodal-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-        }
-
-        #submodal-backdrop.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .submodal-box {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 2rem 1.5rem 1.5rem 1.5rem;
-            max-width: 85vw;
-            max-height: 85vh;
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transform-origin: center center;
-        }
-
-        .submodal-box.crt-enter {
-            animation: tvTurnOn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .submodal-box.crt-exit {
-            animation: tvShutdown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .submodal-box img {
-            max-width: 100%;
-            max-height: 75vh;
-            border-radius: 8px;
-            object-fit: contain;
-            display: block;
-        }
-
-        .submodal-close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            color: #c88b32;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            transition: color 0.2s ease;
-            z-index: 2010;
-            line-height: 1;
-        }
-
-        .submodal-close:hover {
-            color: #ffffff;
-        }
     </style>
 </head>
 <body>
@@ -637,7 +631,7 @@
     <!-- Elemento de Audio -->
     <audio id="bg-music" src="Quimera_Milonga_(Lado_B).mp3" loop preload="auto" crossorigin="anonymous"></audio>
 
-    <!-- Capa de fondo estática de Misión -->
+    <!-- Capa de fondo estática para Misión -->
     <div class="bg-image" id="bg-image"></div>
     
     <!-- Capa de luz reactiva exclusiva del puntero -->
@@ -692,11 +686,11 @@
         </div>
     </div>
 
-    <!-- Submodal para Imágenes con Efectos de Televisión -->
+    <!-- Submodal para Imágenes Intermedias -->
     <div id="submodal-backdrop">
         <div class="submodal-box" id="submodal-content-box">
             <span class="submodal-close" id="submodal-close-btn">&times;</span>
-            <img id="submodal-img" src="" alt="Submodal Imagen">
+            <img id="submodal-img" src="" alt="Imagen Intermedia">
         </div>
     </div>
 
@@ -769,7 +763,7 @@
             img.src = src;
         });
 
-        // CONTENIDO ORIGINAL DE MISIÓN (INDEX M)
+        // DATOS DE MISIÓN CON SUS ENLACES A IMÁGENES INTERMEDIAS
         const modalData = [
             {
                 title: "NUESTRA RAZÓN DE EXISTIR.",
@@ -1176,7 +1170,7 @@
                 }
             }
 
-            // Habilitar la apertura de submodales para las imágenes de Misión
+            // Escuchadores para abrir submodales de imágenes intermedias
             modalBody.querySelectorAll('.modal-link').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1255,7 +1249,7 @@
 
             subImg.src = '';
             subBox.classList.remove('crt-exit');
-            subBox.classList.add('crt-enter');
+            subBox.classList.add('crt-entry');
             subBackdrop.classList.add('active');
             subImg.src = imgSrc;
         }
@@ -1267,7 +1261,7 @@
 
             if (!subBackdrop || !subBox) return;
 
-            subBox.classList.remove('crt-enter');
+            subBox.classList.remove('crt-entry');
             subBox.classList.add('crt-exit');
             subBackdrop.classList.remove('active');
 
