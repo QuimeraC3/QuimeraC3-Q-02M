@@ -470,7 +470,7 @@
             transform-origin: center center;
         }
 
-        /* Submodal para Imágenes intermedias con efectos de TV */
+        /* Submodal para Imágenes intermedias con efectos de TV y Scanlines */
         #submodal-backdrop {
             position: fixed;
             top: 0;
@@ -502,11 +502,27 @@
             max-height: 85vh;
             box-shadow: var(--shadow-lg);
             position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             transform-origin: center center;
+        }
+
+        /* Capa de líneas de barrido CRT para los submodales */
+        .submodal-scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 6px 100%;
+            opacity: 0.75;
+            border-radius: 12px;
         }
 
         .submodal-box img {
@@ -515,6 +531,8 @@
             border-radius: 8px;
             object-fit: contain;
             display: block;
+            position: relative;
+            z-index: 2;
         }
 
         .submodal-close {
@@ -686,9 +704,10 @@
         </div>
     </div>
 
-    <!-- Submodal para Imágenes Intermedias -->
+    <!-- Submodal para Imágenes Intermedias con Scanlines CRT -->
     <div id="submodal-backdrop">
         <div class="submodal-box" id="submodal-content-box">
+            <div class="submodal-scanlines"></div>
             <span class="submodal-close" id="submodal-close-btn">&times;</span>
             <img id="submodal-img" src="" alt="Imagen Intermedia">
         </div>
