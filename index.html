@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MISIÓN DE QUIMERA &bull; Ecosistema Científico, Académico y Profesional</title>
+    
+    <!-- PRECARGA DEFINITIVA DE TODAS LAS IMÁGENES DEL ECOSISTEMA DE MISIÓN -->
+    <link rel="preload" href="Quimera_Mision.webp" as="image">
+    <link rel="preload" href="Quimera_QE_Mod.jpg" as="image">
+    <link rel="preload" href="glitch_Q.webp" as="image">
+    <link rel="preload" href="glitch_U.webp" as="image">
+    <link rel="preload" href="glitch_I.webp" as="image">
+    <link rel="preload" href="glitch_M.webp" as="image">
+    <link rel="preload" href="glitch_E.webp" as="image">
+    <link rel="preload" href="glitch_R.webp" as="image">
+    <link rel="preload" href="glitch_A.webp" as="image">
+    <link rel="preload" href="Investigacion.webp" as="image">
+    <link rel="preload" href="Formacion.webp" as="image">
+    <link rel="preload" href="Desarrollo.webp" as="image">
+    <link rel="preload" href="Aplicacion.webp" as="image">
+    <link rel="preload" href="Transferencia.webp" as="image">
+    <link rel="preload" href="ECQ.webp" as="image">
+
     <style>
         :root {
             --card-bg: rgba(15, 23, 42, 0.90);
@@ -720,6 +738,24 @@
             }
         });
 
+        // PRECARGA DEFINITIVA DE TODAS LAS IMÁGENES EN MEMORIA POR JAVASCRIPT
+        const allImagesToPreload = [
+            'Quimera_Mision.webp',
+            'Quimera_QE_Mod.jpg',
+            'glitch_Q.webp', 'glitch_U.webp', 'glitch_I.webp', 'glitch_M.webp', 'glitch_E.webp', 'glitch_R.webp', 'glitch_A.webp',
+            'Investigacion.webp',
+            'Formacion.webp',
+            'Desarrollo.webp',
+            'Aplicacion.webp',
+            'Transferencia.webp',
+            'ECQ.webp'
+        ];
+
+        allImagesToPreload.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
         // CONTROL DE MOVIMIENTO DEL CURSOR
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
@@ -776,11 +812,6 @@
         const glitchImages = [
             'glitch_Q.webp', 'glitch_U.webp', 'glitch_I.webp', 'glitch_M.webp', 'glitch_E.webp', 'glitch_R.webp', 'glitch_A.webp'
         ];
-
-        glitchImages.forEach(src => {
-            const img = new Image();
-            img.src = src;
-        });
 
         // DATOS DE MISIÓN CON SUS ENLACES A IMÁGENES INTERMEDIAS
         const modalData = [
