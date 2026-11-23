@@ -378,7 +378,14 @@
             line-height: 1.2;
             text-shadow: 0 0 18px rgba(56, 189, 248, 0.55), 0 5px 24px rgba(0, 0, 0, 0.9);
             filter: drop-shadow(0 0 20px rgba(200, 139, 50, 0.22));
+            transition: opacity 750ms ease, filter 0.25s ease, text-shadow 0.25s ease;
             z-index: 24905;
+        }
+
+        .quimera-word-container.final-portal-active:hover {
+            transform: translate(-50%, -50%);
+            text-shadow: 0 0 24px rgba(56, 189, 248, 0.9), 0 0 42px rgba(200, 139, 50, 0.65), 0 5px 24px rgba(0, 0, 0, 0.9);
+            filter: drop-shadow(0 0 28px rgba(56, 189, 248, 0.75)) drop-shadow(0 0 36px rgba(200, 139, 50, 0.45));
         }
 
         .quimera-letter {
@@ -462,6 +469,9 @@
                 transform: translate(-50%, -50%) !important;
                 font-size: clamp(2.35rem, 12vw, 4.5rem) !important;
                 white-space: nowrap !important;
+            }
+            .quimera-word-container.final-portal-active:hover {
+                transform: translate(-50%, -50%) !important;
             }
             .subtitle-text { padding: 0 1rem; }
             .exploration-box { padding: 1rem !important; }
@@ -1445,7 +1455,7 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
             wordContainer.style.opacity = '0';
             wordContainer.style.pointerEvents = 'auto';
             wordContainer.style.cursor = 'pointer';
-            wordContainer.style.textShadow = '0 0 18px rgba(56, 189, 248, 0.55), 0 5px 24px rgba(0, 0, 0, 0.9)';
+            wordContainer.style.textShadow = '';
             wordContainer.setAttribute('tabindex', '0');
 
             // Aparición natural de QUIMERA una vez que el modal ha desaparecido
