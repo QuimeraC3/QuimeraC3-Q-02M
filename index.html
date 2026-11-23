@@ -373,7 +373,7 @@
             color: inherit;
             text-decoration: none;
             display: inline-block;
-            pointer-events: none;
+            cursor: default;
         }
 
         #word-quimera {
@@ -1112,6 +1112,27 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
             mainFooter.classList.add('revealed', 'hologram-mode');
         }
 
+        const letters = document.querySelectorAll('.quimera-letter');
+        const wordLinkElement = document.getElementById('quimera-word-link');
+        let finalPortalUnlocked = false;
+        let currentLetterIndex = 0;
+        let selectedCount = 0;
+        let activeBlinkInterval = null;
+        let globalColorInterval = null;
+        let phraseAnimationRunning = false;
+        let finalMessageTimer = null;
+        let codeAnimationFrame = 0;
+        let completionExitStarted = false;
+
+        if (wordLinkElement) {
+            wordLinkElement.addEventListener('click', (e) => {
+                if (!finalPortalUnlocked) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            });
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(runIntroSequence, 400);
 
@@ -1145,16 +1166,6 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
             }
         });
 
-        const letters = document.querySelectorAll('.quimera-letter');
-        let currentLetterIndex = 0;
-        let selectedCount = 0;
-        let activeBlinkInterval = null;
-        let globalColorInterval = null;
-        let phraseAnimationRunning = false;
-        let finalMessageTimer = null;
-        let codeAnimationFrame = 0;
-        let completionExitStarted = false;
-
         function playQuimeraAppearanceAsync() {
             return new Promise(resolve => {
                 let idx = 0;
@@ -1186,26 +1197,41 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
         }
 
         function activateCurrentLetter() {
-            if (currentLetterIndex >= letters.length) return;
-            const targetLetter = letters[currentLetterIndex];
+            if (finalPortalUnlocked || currentLetterIndex >= letters.length) return;
+
+            const activeIndex = currentLetterIndex;
+            letters.forEach((letter, idx) => {
+                letter.onclick = null;
+                letter.style.cursor = 'default';
+                if (idx === activeIndex) {
+                    letter.style.cursor = 'pointer';
+                    letter.onclick = (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (!finalPortalUnlocked && idx === currentLetterIndex) {
+                            handleLetterClick(idx);
+                        }
+                    };
+                }
+            });
+
+            const targetLetter = letters[activeIndex];
             let isWhite = true;
 
             activeBlinkInterval = setInterval(() => {
                 targetLetter.style.color = isWhite ? '#c88b32' : '#ffffff';
                 isWhite = !isWhite;
             }, 250);
-
-            targetLetter.style.cursor = 'pointer';
-            targetLetter.onclick = (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                handleLetterClick(currentLetterIndex);
-            };
         }
 
         function handleLetterClick(index) {
+            if (finalPortalUnlocked || index !== currentLetterIndex) return;
+
             const targetLetter = letters[index];
-            targetLetter.onclick = null;
+            letters.forEach(letter => {
+                letter.onclick = null;
+                letter.style.cursor = 'default';
+            });
             clearInterval(activeBlinkInterval);
 
             let blinks = 0;
@@ -1272,7 +1298,7 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
             });
 
             const quimeraWord = document.getElementById('quimera-word');
-            if (quimeraWord) {
+            if (quimeraWord && !finalPortalUnlocked) {
                 quimeraWord.classList.remove('hologram-mode');
                 quimeraWord.style.transition = 'none';
                 quimeraWord.style.opacity = '0';
@@ -1480,6 +1506,13 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
            ═══════════════════════════════════════════════════════════ */
 
         function navigateToQuimeraPortal(event) {
+            if (!finalPortalUnlocked) {
+                if (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                return;
+            }
             if (event) event.preventDefault();
             if (completionExitStarted) return;
             completionExitStarted = true;
@@ -1507,6 +1540,12 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
         }
 
         function enableFinalHyperlink() {
+            finalPortalUnlocked = true;
+            letters.forEach(letter => {
+                letter.onclick = null;
+                letter.style.cursor = 'pointer';
+            });
+
             const wordContainer = document.getElementById('quimera-word');
             const wordLink = document.getElementById('quimera-word-link');
 
@@ -1585,7 +1624,8 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
             const msgEl = document.getElementById('completion-message');
             if (!msgEl || completionExitStarted) return;
 
-            msgEl.textContent = "HAS GANADO EL ACCESO AL TERCERO DE SIETE CÓDIGOS.\nGUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.";
+            msgEl.textContent = "HAS GANADO EL ACCESO AL TERCERO DE SIETE CÓDIGOS.
+GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.";
             msgEl.classList.remove('revealed', 'active-laser');
             void msgEl.offsetWidth;
             msgEl.classList.add('active-laser');
