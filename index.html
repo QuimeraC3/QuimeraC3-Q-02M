@@ -369,45 +369,82 @@
             transition: opacity 750ms ease;
         }
 
-        /* Halo azul intenso por letra (estilo index03V), sin marco rectangular en el contenedor */
+        .quimera-portal-link {
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+            pointer-events: none;
+        }
+
+        #word-quimera {
+            display: inline-block;
+            color: #ffffff;
+        }
+
+        /* Mejoras del portal final de index03V adaptadas a index02M */
         .quimera-word-container.final-portal-active {
-            top: 68%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: fixed !important;
+            top: 68% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            margin: 0 !important;
+            padding: 0.25rem 0.75rem !important;
+            width: auto !important;
+            max-width: 96vw !important;
+            font-family: Georgia, "Times New Roman", serif !important;
+            text-align: center !important;
+            clip-path: none !important;
+            -webkit-clip-path: none !important;
+            filter: none !important;
+            z-index: 30000 !important;
+            pointer-events: auto !important;
+        }
+
+        .quimera-word-container.final-portal-active .quimera-portal-link {
+            display: inline-block !important;
+            pointer-events: auto !important;
+            cursor: pointer !important;
+            text-decoration: none !important;
+            outline: none;
+            white-space: nowrap !important;
+        }
+
+        .quimera-word-container.final-portal-active .quimera-portal-link:focus-visible #word-quimera {
+            outline: 2px solid #38bdf8;
+            outline-offset: 8px;
+            border-radius: 8px;
+        }
+
+        .quimera-word-container.final-portal-active #word-quimera {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            font-family: Georgia, "Times New Roman", serif;
             font-size: clamp(2.3rem, 8.5vw, 6rem);
             font-weight: 900;
             letter-spacing: 0.04em;
             line-height: 1.15;
-            text-shadow: none;
-            filter: none;
-            transition: opacity 750ms ease;
-            z-index: 24905;
+            white-space: nowrap !important;
+            -webkit-text-stroke: 1.5px #000000;
+            text-shadow: 0 0 18px rgba(56, 189, 248, 0.55), 0 5px 24px rgba(0, 0, 0, 0.9);
+            filter: drop-shadow(0 0 20px rgba(200, 139, 50, 0.22));
+            transition: transform 0.25s ease, filter 0.25s ease;
         }
 
-        .quimera-word-container.final-portal-active:hover {
-            transform: translate(-50%, -50%);
-            text-shadow: none;
-            filter: none;
+        .quimera-word-container.final-portal-active .quimera-portal-link:hover #word-quimera {
+            transform: none;
+            filter: drop-shadow(0 0 28px rgba(56, 189, 248, 0.75));
         }
 
         .quimera-letter {
             display: inline-block;
             color: #ffffff;
-            text-shadow: 0 0 18px rgba(56, 189, 248, 0.85), 0 0 36px rgba(56, 189, 248, 0.55), 0 4px 16px rgba(0, 0, 0, 0.85);
-            transition: color 0.35s ease, text-shadow 0.25s ease;
+            transition: color 0.35s ease, text-shadow 0.35s ease;
         }
 
         .quimera-letter.gold {
             color: #c88b32;
-            text-shadow: 0 0 18px rgba(200, 139, 50, 0.95), 0 0 34px rgba(56, 189, 248, 0.65);
-        }
-
-        .quimera-word-container.final-portal-active:hover .quimera-letter {
-            text-shadow: 0 0 22px rgba(56, 189, 248, 1), 0 0 44px rgba(56, 189, 248, 0.85), 0 0 64px rgba(56, 189, 248, 0.55), 0 4px 16px rgba(0, 0, 0, 0.85);
-        }
-
-        .quimera-word-container.final-portal-active:hover .quimera-letter.gold {
-            text-shadow: 0 0 24px rgba(200, 139, 50, 1), 0 0 42px rgba(56, 189, 248, 0.95), 0 0 60px rgba(56, 189, 248, 0.65);
+            text-shadow: 0 0 18px rgba(200, 139, 50, 0.95), 0 0 34px rgba(200, 139, 50, 0.55);
         }
 
         .subtitle-text {
@@ -478,12 +515,15 @@
                 top: 68% !important;
                 left: 50% !important;
                 transform: translate(-50%, -50%) !important;
+                white-space: nowrap !important;
+            }
+            .quimera-word-container.final-portal-active #word-quimera {
                 font-size: clamp(2.1rem, 10vw, 4.2rem) !important;
                 letter-spacing: 0.03em !important;
                 white-space: nowrap !important;
             }
-            .quimera-word-container.final-portal-active:hover {
-                transform: translate(-50%, -50%) !important;
+            .quimera-word-container.final-portal-active .quimera-portal-link:hover #word-quimera {
+                transform: none;
             }
             .subtitle-text { padding: 0 1rem; }
             .exploration-box { padding: 1rem !important; }
@@ -799,8 +839,10 @@
 
     <h1 class="page-title laser-burn-effect" id="main-title">MISIÓN</h1>
 
-    <div class="quimera-word-container laser-burn-effect" id="quimera-word" tabindex="-1" role="link" aria-label="Acceder a https://quimerac3.github.io/QuimeraC3-Q/">
-        <span class="quimera-letter" data-index="0">Q</span><span class="quimera-letter" data-index="1">U</span><span class="quimera-letter" data-index="2">I</span><span class="quimera-letter" data-index="3">M</span><span class="quimera-letter" data-index="4">E</span><span class="quimera-letter" data-index="5">R</span><span class="quimera-letter" data-index="6">A</span>
+    <div class="quimera-word-container laser-burn-effect" id="quimera-word">
+        <a id="quimera-word-link" href="https://quimerac3.github.io/QuimeraC3-Q/" class="quimera-portal-link" tabindex="-1" aria-disabled="true">
+            <span id="word-quimera"><span class="quimera-letter" data-index="0">Q</span><span class="quimera-letter" data-index="1">U</span><span class="quimera-letter" data-index="2">I</span><span class="quimera-letter" data-index="3">M</span><span class="quimera-letter" data-index="4">E</span><span class="quimera-letter" data-index="5">R</span><span class="quimera-letter" data-index="6">A</span></span>
+        </a>
     </div>
 
     <div class="subtitle-text laser-burn-effect" id="sub-text"></div>
@@ -1459,15 +1501,26 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
 
         function enableFinalHyperlink() {
             const wordContainer = document.getElementById('quimera-word');
+            const wordLink = document.getElementById('quimera-word-link');
 
-            wordContainer.classList.remove('fade-out-element');
-            wordContainer.classList.add('final-portal-active');
+            if (wordContainer.parentElement !== document.body) {
+                document.body.appendChild(wordContainer);
+            }
+
+            wordContainer.classList.remove('fade-out-element', 'hologram-mode', 'active-laser', 'laser-burn-effect');
+            wordContainer.classList.add('final-portal-active', 'revealed');
+            wordContainer.style.clipPath = 'none';
             wordContainer.style.opacity = '0';
             wordContainer.style.pointerEvents = 'auto';
-            wordContainer.style.cursor = 'pointer';
-            wordContainer.style.textShadow = '';
-            wordContainer.style.filter = '';
-            wordContainer.setAttribute('tabindex', '0');
+
+            if (wordLink) {
+                wordLink.href = QUIMERA_PORTAL_URL;
+                wordLink.setAttribute('tabindex', '0');
+                wordLink.setAttribute('aria-disabled', 'false');
+                wordLink.setAttribute('aria-label', 'Ir a https://quimerac3.github.io/QuimeraC3-Q/');
+                wordLink.style.pointerEvents = 'auto';
+                wordLink.onclick = (e) => navigateToQuimeraPortal(e);
+            }
 
             requestAnimationFrame(() => {
                 wordContainer.style.transition = 'opacity 750ms ease';
@@ -1519,13 +1572,6 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
             finalMessageTimer = setTimeout(() => {
                 showFinalMessage();
             }, 1000);
-
-            wordContainer.onclick = (e) => navigateToQuimeraPortal(e);
-            wordContainer.onkeydown = (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    navigateToQuimeraPortal(e);
-                }
-            };
         }
 
         function showFinalMessage() {
