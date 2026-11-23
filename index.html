@@ -384,8 +384,16 @@
 
         .quimera-word-container.final-portal-active:hover {
             transform: translate(-50%, -50%);
-            text-shadow: 0 0 24px rgba(56, 189, 248, 0.9), 0 0 42px rgba(200, 139, 50, 0.65), 0 5px 24px rgba(0, 0, 0, 0.9);
-            filter: drop-shadow(0 0 28px rgba(56, 189, 248, 0.75)) drop-shadow(0 0 36px rgba(200, 139, 50, 0.45));
+            text-shadow: 0 0 22px rgba(56, 189, 248, 0.95), 0 0 42px rgba(56, 189, 248, 0.65), 0 0 60px rgba(200, 139, 50, 0.55);
+            filter: drop-shadow(0 0 28px rgba(56, 189, 248, 0.75)) drop-shadow(0 0 48px rgba(200, 139, 50, 0.45));
+        }
+
+        .quimera-word-container.final-portal-active:hover .quimera-letter {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.9), 0 0 38px rgba(56, 189, 248, 0.55);
+        }
+
+        .quimera-word-container.final-portal-active:hover .quimera-letter.gold {
+            text-shadow: 0 0 22px rgba(200, 139, 50, 1), 0 0 42px rgba(56, 189, 248, 0.75);
         }
 
         .quimera-letter {
@@ -1210,7 +1218,6 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
                 if (el) el.classList.add('fade-out-element');
             });
 
-            // QUIMERA permanece oculta esperando detrás del modal hasta que este desaparezca
             const quimeraWord = document.getElementById('quimera-word');
             if (quimeraWord) {
                 quimeraWord.classList.remove('hologram-mode');
@@ -1359,7 +1366,6 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
                 modalBox.classList.add('crt-exit');
                 backdrop.classList.remove('active');
 
-                // Esperar a que termine tvShutdown (400ms) para que el modal haya desaparecido antes de revelar QUIMERA
                 setTimeout(() => {
                     letters[index].style.color = '#c88b32';
                     currentLetterIndex++;
@@ -1458,7 +1464,6 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
             wordContainer.style.textShadow = '';
             wordContainer.setAttribute('tabindex', '0');
 
-            // Aparición natural de QUIMERA una vez que el modal ha desaparecido
             requestAnimationFrame(() => {
                 wordContainer.style.transition = 'opacity 750ms ease';
                 wordContainer.style.opacity = '1';
@@ -1505,7 +1510,6 @@ GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
 
             runSequence();
 
-            // 1 segundo después de aparecer QUIMERA con su animación de colores, entra el mensaje con láser
             if (finalMessageTimer) clearTimeout(finalMessageTimer);
             finalMessageTimer = setTimeout(() => {
                 showFinalMessage();
