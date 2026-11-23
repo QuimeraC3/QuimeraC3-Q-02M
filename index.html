@@ -381,7 +381,6 @@
             color: #ffffff;
         }
 
-        /* Mejoras del portal final de index03V adaptadas a index02M */
         .quimera-word-container.final-portal-active {
             position: fixed !important;
             top: 68% !important;
@@ -742,10 +741,6 @@
 
         .close-link:hover { color: #e0a96d; }
 
-        /* ═══════════════════════════════════════════════════════════
-           ESCENA FINAL — Clonada de indexQuimeratrix_3
-           ═══════════════════════════════════════════════════════════ */
-
         #completion-message {
             position: fixed;
             top: 22%;
@@ -871,10 +866,8 @@
         </div>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         ESCENA FINAL — Clonada de indexQuimeratrix
-         ═══════════════════════════════════════════════════════════ -->
-    <p id="completion-message" class="laser-burn-effect">HAS GANADO EL ACCESO AL TERCERO DE SIETE CÓDIGOS.\nGUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
+    <p id="completion-message" class="laser-burn-effect">HAS GANADO EL ACCESO AL TERCERO DE SIETE CÓDIGOS.
+GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.</p>
     <canvas id="phrase-canvas" aria-hidden="true"></canvas>
 
     <script>
@@ -1500,10 +1493,6 @@
             }, 400);
         }
 
-        /* ═══════════════════════════════════════════════════════════
-           ESCENA FINAL — Clonada de indexQuimeratrix_3
-           ═══════════════════════════════════════════════════════════ */
-
         function navigateToQuimeraPortal(event) {
             if (!finalPortalUnlocked) {
                 if (event) {
@@ -1623,8 +1612,7 @@
             const msgEl = document.getElementById('completion-message');
             if (!msgEl || completionExitStarted) return;
 
-            msgEl.textContent = "HAS GANADO EL ACCESO AL TERCERO DE SIETE CÓDIGOS.
-GUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.";
+            msgEl.textContent = "HAS GANADO EL ACCESO AL TERCERO DE SIETE CÓDIGOS.\nGUÁRDALO, TE SERÁ ÚTIL EN UN FUTURO CERCANO.";
             msgEl.classList.remove('revealed', 'active-laser');
             void msgEl.offsetWidth;
             msgEl.classList.add('active-laser');
